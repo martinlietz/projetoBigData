@@ -1,0 +1,19 @@
+a - quantos registro existem no dataframe
+43182
+b - quantas equipes únicas mandantes existem no dataframe
+306
+c - quantas vezes as equipes mandantes saíram vitoriosas
+21004
+d - quantas vezes as equipes visitantes saíram vitoriosas
+12223
+e - quantas partidas resultaram em empate
+9955
+f - a partir de um dataframe, crie uma tabela no Hive com o nome de partida_pais com o
+total de partida em cadas país
+dfCount = df.groupBy("country").count()
+dfCount.show()
+dfCount.saveAsTable("projeto.partida_pais")
+g - utilizando o hive e a tabela partida_pais, em qual país teve mais partidas
+sqlContext.sql("USE projeto")
+sqlContext.sql("SELECT * FROM projeto.partida_pais ORDER BY count DESC").head(1)
+United States com 1236 jogos.

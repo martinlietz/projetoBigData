@@ -1,0 +1,32 @@
+1  CREATE TABLE `projeto.resultados`(
+2	  `date` date, 
+3	  `home_team` string, 
+4	  `away_team` string, 
+5	  `home_score` int, 
+6	  `away_score` int, 
+7	  `tournament` string, 
+8	  `city` string, 
+9	  `country` string, 
+10	  `neutral` boolean)
+11	COMMENT 'Tabela projeto big data lets code'
+12	ROW FORMAT SERDE 
+13	  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+14	WITH SERDEPROPERTIES ( 
+15	  'field.delim'=',', 
+16	  'serialization.format'=',') 
+17	STORED AS INPUTFORMAT 
+18	  'org.apache.hadoop.mapred.TextInputFormat' 
+19	OUTPUTFORMAT 
+20	  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+21	LOCATION
+22	  'hdfs://quickstart.cloudera:8020/user/hive/warehouse/projeto.db/resultados'
+23	TBLPROPERTIES (
+24	  'COLUMN_STATS_ACCURATE'='true', 
+25	  'numFiles'='1', 
+26	  'numRows'='0', 
+27	  'rawDataSize'='0', 
+28	  'totalSize'='3228247', 
+
+load data inpath '/user/hive/projeto/results.csv' overwrite into table projeto.resultados; 
+
+SELECT * FROM projeto.resultados LIMIT 5;
